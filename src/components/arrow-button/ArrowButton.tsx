@@ -21,7 +21,7 @@ export const ArrowButton = ({ onClick, menuOpen }: OnClick) => {
 			role='button'
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
-			className={`${styles.container} ${menuOpen ? styles.container_open : ''}`}
+			className={clsx(styles.container, menuOpen && styles.container_open)}
 			onClick={(e: React.MouseEvent) => {
 				e.stopPropagation();
 				onClickHandler();
