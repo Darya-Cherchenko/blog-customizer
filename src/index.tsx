@@ -1,10 +1,10 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties, useState, useContext } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState } from './constants/articleProps'
+import { defaultArticleState } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
@@ -27,7 +27,10 @@ const App = () => {
 					'--bg-color': defaultArticleState.backgroundColor.value,
 				} as CSSProperties
 			}>
-			<ArticleParamsForm articleState={articleState} setArticleState={setArticleState}/>
+			<ArticleParamsForm
+				articleState={articleState}
+				setArticleState={setArticleState}
+			/>
 			<Article />
 		</div>
 	);
