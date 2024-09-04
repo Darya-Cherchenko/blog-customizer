@@ -25,23 +25,21 @@ interface IArticleParamsFormProps {
 }
 
 export const ArticleParamsForm = ({
-	articleState,
 	setArticleState,
 }: IArticleParamsFormProps) => {
-	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const [formState, setFormState] = useState({
-		fontFamily: articleState.fontFamilyOption,
-		fontSize: articleState.fontSizeOption,
-		fontColor: articleState.fontColor,
-		backgroundColor: articleState.backgroundColor,
-		contentWidth: articleState.contentWidth,
+		fontFamily: defaultArticleState.fontFamilyOption,
+		fontSize: defaultArticleState.fontSizeOption,
+		fontColor: defaultArticleState.fontColor,
+		backgroundColor: defaultArticleState.backgroundColor,
+		contentWidth: defaultArticleState.contentWidth,
 	});
-	const rootRef = useRef<HTMLElement | null>(null);
 	const menuRef = useRef<HTMLFormElement | null>(null);
 
 	function toggleOpenForm(bool?: boolean): void {
-		if (bool !== undefined) setMenuOpen(bool);
-		else setMenuOpen(!menuOpen);
+		if (bool !== undefined) setIsMenuOpen(bool);
+		else setIsMenuOpen(!isMenuOpen);
 	}
 
 	function reloadState() {
@@ -66,14 +64,14 @@ export const ArticleParamsForm = ({
 			contentWidth: formState.contentWidth,
 		});
 
-		setMenuOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	useEffect(() => {
 		const handleOutsideClick = (event: MouseEvent) => {
 			const element = event.target as HTMLElement;
 			if (menuRef.current && !menuRef.current.contains(element)) {
-				setMenuOpen(false);
+				setIsMenuOpen(false);
 			}
 		};
 
@@ -85,10 +83,10 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton onClick={() => toggleOpenForm()} menuOpen={menuOpen} />
+			<ArrowButton onClick={() => toggleOpenForm()} menuOpen={isMenuOpen} />
 			<aside
-				className={clsx(styles.container, menuOpen && styles.container_open)}
-				ref={rootRef}>
+				className={clsx(styles.container, isMenuOpen && styles.container_open)}
+				ref={menuRef}>
 				<form
 					className={styles.form}
 					ref={menuRef}
